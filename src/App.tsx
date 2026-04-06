@@ -4,14 +4,8 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [value, updateValue] = useLocalStorage("key", 'Начальное значение');
-  const [input, setInput] = useState('')
-
-  useEffect(() => {
-    setInput(value)
-  }, [])
 
   function onChange(evt: Event) {
-    setInput(evt.target.value)
     updateValue(evt.target.value)
   }
 
@@ -22,7 +16,7 @@ function App() {
         {value}
       </p>
       <p>
-        <input onChange={onChange} value={input}/>
+        <input onChange={onChange} value={value}/>
       </p>
     </>
   );

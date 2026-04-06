@@ -1,15 +1,18 @@
-export function useLocalStorage(fieldName: string, initialValue: any) {
-    function updateValue(value: string) {
-        window.localStorage.setItem(fieldName, value)
-    }
+import { useState, useEffect } from 'react'
 
-    function result() {
+export function useLocalStorage(fieldName: string, initialValue: any) {
+    const [output, setOutput] = useState(() => {
         if (!window.localStorage.getItem(fieldName)) {
             window.localStorage.setItem(fieldName, initialValue)
         }
 
         return window.localStorage.getItem(fieldName)
+    })
+
+    function updateValue(value: string) {
+        window.localStorage.setItem(fieldName, value)
+        setOutput(value)
     }
 
-    return [result(), updateValue]
+    return [output, updateValue]
 }
